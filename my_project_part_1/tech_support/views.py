@@ -20,3 +20,5 @@ def statistics(request):
             }
         )
     return JsonResponse(response, safe=False)
+
+
