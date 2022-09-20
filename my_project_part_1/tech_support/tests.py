@@ -1,7 +1,7 @@
 import factory
 from django.test import TestCase
 from django.test.client import Client
-from tech_support.models import Statistic
+from my_project_part_1.tech_support.models import Statistic
 
 
 class StatisticFactory(factory.django.DjangoModelFactory):
