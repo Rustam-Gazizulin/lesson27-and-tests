@@ -8,4 +8,5 @@ urlpatterns = [
     path("", views.courses, name="courses"),
     path("new/", views.new_courses, name="new_courses"),
     path("<str:slug>/", views.get_course, name="get_course"),
+    #  path("search/", views.search, name="courses_search"),
 ]

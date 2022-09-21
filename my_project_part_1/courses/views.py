@@ -5,6 +5,10 @@ from django.shortcuts import get_object_or_404
 
 def courses(request):
     courses_list = Course.objects.all()
+
+    search_text = request.GET.get("author", None)
+    if search_text:
+        courses_list = courses_list.filter(author=search_text)
     response = []
     for course in courses_list:
         response.append(
@@ -54,6 +58,23 @@ def get_course(request, slug):
     )
 
 
-def search(request):
-    # TODO напишите здесь view-функцию (задание who's author)
-    pass
+# def search(request):
+#     courses = Course.objects.GET(author=True)
+#     search_text = request.GET.get("author", None)
+#     if search_text:
+#         courses = courses.filter(author=search_text)
+#
+#     response = []
+#     for course in courses:
+#         response.append(
+#             {
+#                 "id": course.id,
+#                 "slug": course.slug,
+#                 "author": course.author,
+#                 "description": course.description,
+#                 "start_day": course.start_day,
+#                 "status": course.status,
+#                 "created": course.created,
+#             }
+#         )
+#     return JsonResponse(response, safe=False)
