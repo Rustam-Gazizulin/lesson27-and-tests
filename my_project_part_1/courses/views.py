@@ -1,5 +1,6 @@
 from courses.models import Course
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 
 def courses(request):
@@ -39,8 +40,18 @@ def new_courses(request):
 
 
 def get_course(request, slug):
-    # TODO напишите здесь view-функцию (задание find_by_name)
-    pass
+    course = Course.objects.get(slug=slug)
+    return JsonResponse(
+        {
+            "id": course.id,
+            "slug": course.slug,
+            "author": course.author,
+            "description": course.description,
+            "start_day": course.start_day,
+            "status": course.status,
+            "created": course.created,
+        }
+    )
 
 
 def search(request):
