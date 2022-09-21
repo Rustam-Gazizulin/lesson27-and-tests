@@ -58,23 +58,24 @@ def get_course(request, slug):
     )
 
 
-# def search(request):
-#     courses = Course.objects.GET(author=True)
-#     search_text = request.GET.get("author", None)
-#     if search_text:
-#         courses = courses.filter(author=search_text)
+def search(request):
+    courses_search = Course.objects.all()
+
+    search_text = request.GET.get("author", None)
+    if search_text:
+        courses_search = courses_search.filter(author=search_text)
 #
-#     response = []
-#     for course in courses:
-#         response.append(
-#             {
-#                 "id": course.id,
-#                 "slug": course.slug,
-#                 "author": course.author,
-#                 "description": course.description,
-#                 "start_day": course.start_day,
-#                 "status": course.status,
-#                 "created": course.created,
-#             }
-#         )
-#     return JsonResponse(response, safe=False)
+    response = []
+    for course in courses_search:
+        response.append(
+            {
+                "id": course.id,
+                "slug": course.slug,
+                "author": course.author,
+                "description": course.description,
+                "start_day": course.start_day,
+                "status": course.status,
+                "created": course.created,
+            }
+        )
+    return JsonResponse(response, safe=False)
