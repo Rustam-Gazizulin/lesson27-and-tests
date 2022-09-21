@@ -21,8 +21,21 @@ def courses(request):
 
 
 def new_courses(request):
-    # TODO напишите здесь view-функцию (задание new_courses)
-    pass
+    cours_new = Course.objects.filter(status="new")
+    response = []
+    for course in cours_new:
+        response.append(
+            {
+                "id": course.id,
+                "slug": course.slug,
+                "author": course.author,
+                "description": course.description,
+                "start_day": course.start_day,
+                "status": course.status,
+                "created": course.created,
+            }
+        )
+    return JsonResponse(response, safe=False)
 
 
 def get_course(request, slug):
